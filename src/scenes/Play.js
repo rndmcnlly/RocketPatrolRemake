@@ -8,6 +8,8 @@ class Play extends Phaser.Scene {
         this.load.image('rocket', 'assets/rocket.png');
         this.load.image('spaceship', 'assets/spaceship.png');
         this.load.spritesheet('explosion', './assets/explosion.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
+        this.load.audio('sfx_explosion', './assets/explosion38.wav');
+        this.load.audio('sfx_rocket', './assets/rocket_shot.wav');
     }
 
     create() {
@@ -109,6 +111,7 @@ class Play extends Phaser.Scene {
     }
 
     destroyShip(ship) {
+        this.sound.play('sfx_explosion');
         ship.alpha = 0;
         let boom = this.add.sprite(ship.x, ship.y, 'explosion');
         boom.anims.play('explode');
