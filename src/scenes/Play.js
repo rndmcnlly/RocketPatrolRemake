@@ -11,6 +11,8 @@ class Play extends Phaser.Scene {
 
     create() {
 
+        this.p1Score = 0;
+
         this.starfield = this.add.tileSprite(
             0,0,640,480, 'starfield'
         ).setOrigin(0,0);
@@ -54,5 +56,18 @@ class Play extends Phaser.Scene {
         this.ship1.update();
         this.ship2.update();
         this.ship3.update();
+
+        let r = this.p1Rocket;
+        for(let s of [this.ship1, this.ship2, this.ship3]) {
+            if(r.x < s.x + s.width &&
+               r.x + r.width > s.x &&
+               r.y < s.y + s.height &&
+               r.y + r.height > s.y) {
+                   r.reset();
+                   s.reset();
+                   this.p1Score += s.pointValue;
+               }
+        }
+
     }
 }
