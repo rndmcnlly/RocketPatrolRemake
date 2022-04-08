@@ -10,6 +10,12 @@ class Play extends Phaser.Scene {
 
     create() {
 
+        keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
+        keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
+        keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
+        keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
+
+
         this.starfield = this.add.tileSprite(
             0,0,640,480, 'starfield'
         ).setOrigin(0,0);
@@ -34,7 +40,13 @@ class Play extends Phaser.Scene {
 
     update() {
         this.starfield.tilePositionX -= 4;
-        this.p1Rocket.y -= 1;
+        const movementSpeed = 4;
+        if(keyLEFT.isDown) {
+            this.p1Rocket.x -= movementSpeed;
+        }
+        if(keyRIGHT.isDown) {
+            this.p1Rocket.x += movementSpeed;
+        }
 
     }
 }
