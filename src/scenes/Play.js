@@ -20,6 +20,9 @@ class Play extends Phaser.Scene {
             0,0,640,480, 'starfield'
         ).setOrigin(0,0);
 
+        this.p1Rocket = new Rocket(this, game.config.width/2,431,'rocket').setOrigin(0.5, 0);
+        this.p1Rocket.reset();
+
         // green UI background
         this.add.rectangle(
             0,
@@ -35,7 +38,7 @@ class Play extends Phaser.Scene {
 	    this.add.rectangle(0, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0 ,0);
 	    this.add.rectangle(game.config.width - borderUISize, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0 ,0);
 
-        this.p1Rocket = new Rocket(this, game.config.width/2, 431, 'rocket').setOrigin(0.5, 0);
+        
     }
 
     update() {
@@ -48,5 +51,10 @@ class Play extends Phaser.Scene {
             this.p1Rocket.x += movementSpeed;
         }
 
+        if(Phaser.Input.Keyboard.JustDown(keyF)) {
+            this.p1Rocket.firing = true;
+        }
+
+        this.p1Rocket.update();
     }
 }
